@@ -30,7 +30,7 @@ CLIP_DURATION = 2.0
 SAMPLE_RATE = 16000
 
 # ==========================================
-# 1. Model Architectures (must match fusion-train.py)
+# 1. Model Architectures 
 # ==========================================
 class ResidualBlock(nn.Module):
     def __init__(self, dim, dropout=0.2):
@@ -105,7 +105,7 @@ class MultimodalFusionNet(nn.Module):
         return self.fusion_head(combined)
 
 # ==========================================
-# 2. Audio helpers (match fusion-train.py)
+# 2. Audio helpers 
 # ==========================================
 def parse_segments(txt_path):
     segments = []
@@ -142,7 +142,7 @@ def get_patient_id(wav_path):
     return int(match.group(1)) if match else 0
 
 # ==========================================
-# 3. Tabular profile generator (match fusion-train.py)
+# 3. Tabular profile generator 
 # ==========================================
 DIAGNOSIS_PROFILES = {
     'COPD':           {'age': (55, 80), 'pack_years': (20, 80), 'copd_diagnosis': 1, 'risk': 'high'},
@@ -207,8 +207,7 @@ def load_medgemma():
     tokenizer = AutoTokenizer.from_pretrained(
         MEDGEMMA_MODEL_ID, token=HF_TOKEN
     )
-    # Single-GPU placement avoids cross-device overhead (model is ~8.6 GB bf16,
-    # fits comfortably on one 24 GB RTX 3090).
+   
     # Note: eager attention used because Flash/MemEfficient SDPA kernels are
     # unavailable on Windows PyTorch + Gemma3 GQA (mismatched Q/KV heads).
     medgemma = AutoModelForCausalLM.from_pretrained(
