@@ -24,7 +24,7 @@ threading.excepthook = _suppress_auto_conversion
 # ==========================================
 # Configuration
 # ==========================================
-HF_TOKEN = "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"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 CLIP_DURATION = 2.0
 SAMPLE_RATE = 16000

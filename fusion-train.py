@@ -28,7 +28,7 @@ threading.excepthook = _suppress_auto_conversion
 # ==========================================
 # Configuration
 # ==========================================
-HF_TOKEN = "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"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 EPOCHS = 50
 BATCH_SIZE = 64

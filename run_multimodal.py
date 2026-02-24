@@ -18,7 +18,7 @@ def _suppress_auto_conversion(args):
 threading.excepthook = _suppress_auto_conversion
 
 # Configuration parameters
-HF_TOKEN = "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"
+HF_TOKEN = os.environ.get("HF_TOKEN")
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 MODEL_WEIGHTS = "respiratory_classifier.pth"
 CONFIG_PATH = "classifier_config.json"
